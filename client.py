@@ -3,9 +3,10 @@ from PIL import Image
 
 HEADER_SIZE = 10
 PORT = 1234
+HOST = '192.168.0.102'
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((socket.gethostname(), PORT))
+s.connect((HOST, PORT))
 
 
 def get_message(text):
@@ -36,7 +37,7 @@ def get_data(path_to_image):
     return ' '.join(colors)
 
 
-data = get_data('C:\\Users\\User\\Desktop\\github\\summer_practice_2020\\photo5.jpg')
+data = get_data('C:\\Users\\79198\\Desktop\\TotalBullshit\\UIR\\researchwork2021\\photo6.jpg')
 message = get_message(data)
 
 while True:

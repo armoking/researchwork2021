@@ -7,6 +7,7 @@ PATH_TO_SOURCE = 'source.txt'
 PATH_TO_PARSER = '/Parser/main.exe'
 PATH_TO_CNN = 'Recognizer/parse_image.py'
 PATH_TO_ANSWER = 'answer.txt'
+PATH_TO_IMPROVED_ANSWER = 'imp_answer.txt'
 
 # idea:
 # 1. Client send image to Server
@@ -16,6 +17,7 @@ PATH_TO_ANSWER = 'answer.txt'
 
 def __main__(data):
     output = open(PATH_TO_SOURCE, 'w')
+    print(len(data))
     output.write(data)
     output.close()
 
@@ -25,4 +27,5 @@ def __main__(data):
     print('Image has been parsed')
     os.system('python ./Recognizer/parse_image.py')
     print('Recognition finished')
-    return open(PATH_TO_ANSWER).read()
+    os.system('.\\FuzzyStringSearch\\main.exe')
+    return open(PATH_TO_IMPROVED_ANSWER).read()

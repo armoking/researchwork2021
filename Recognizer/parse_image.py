@@ -7,11 +7,13 @@ alphabet = list('0123456789аАбБвВгГдДежзийклмнопПрРст�
 
 
 if __name__ == '__main__':
-	answer = ''	
 	inputData = []
 	index = 0
+	print(filename, flush=True)
 	inp = open(filename).read().split('\n')	
+	
 	letters_count = int(inp[index])
+	answer = ''
 	index += 1
 	
 	cnn = load_model('Recognizer/main_cnn.h5')
@@ -37,7 +39,8 @@ if __name__ == '__main__':
 					black_pixels += 1
 					s[i] = 255
 			data.append(s)
-	
+		total = 0
+		
 		for x in range(n):
 			for y in range(m):
 				val = data[x][y]
@@ -45,25 +48,24 @@ if __name__ == '__main__':
 				y_index = int(y * 32 / m)
 				cnt[x_index][y_index] += 1
 				arr[x_index][y_index] += val
-
+				total += cnt[x_index][y_index]
+		
 		for x in range(32):
 			for y in range(32):
 				arr[x][y] //= max(1, cnt[x][y])
 
 		prediction = cnn.predict(np.array(arr).reshape((1, 32, 32, 1))).reshape(51)
 		max_probability = 0
-		current_result = '?'
-		for i in range(51):
-			if prediction[i] > max_probability:
-				max_probability = prediction[i]
-				current_result = alphabet[i]
-		if black_pixels == 0:
-			answer += ' '
-		else:
-			answer += current_result
-	
+		if black_pixels:
+			current_result = ''
+			for i in range(51):
+				current_result += '%.7f ' % prediction[i]
+			answer += current_result + '\n'
+		
 	output = open(answerPath, 'w')
+	answer = str(len(answer.split('\n'))) + '\n' + answer
 	output.write(answer)
+	output.flush();
 	output.close()
 	
 	print("""***IMAGE HAS BEEN RECOGNIZED***""")

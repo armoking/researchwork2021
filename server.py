@@ -2,10 +2,11 @@ import socket
 import main
 
 HEADER_SIZE = 10
+HOST = '192.168.0.102'
 PORT = 1234
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind((socket.gethostname(), PORT))
+s.bind((HOST, PORT))
 
 s.listen(5)
 
@@ -25,6 +26,5 @@ while True:
     result = client_socket.recv(header).decode('utf-8')
 
     recognized_text = main.__main__(result)
-    print(recognized_text)
     client_socket.send(get_message(recognized_text))
     client_socket.close()

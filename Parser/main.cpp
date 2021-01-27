@@ -6,8 +6,8 @@
 #include <iostream>
 
 
-const std::string PATH_TO_SOURCE = "C:\\Users\\User\\Desktop\\github\\summer_practice_2020\\source.txt";
-const std::string PATH_TO_RESULT = "C:\\Users\\User\\Desktop\\github\\summer_practice_2020\\result.txt";
+const std::string PATH_TO_SOURCE = "C:\\Users\\79198\\Desktop\\TotalBullshit\\UIR\\researchwork2021\\source.txt";
+const std::string PATH_TO_RESULT = "C:\\Users\\79198\\Desktop\\TotalBullshit\\UIR\\researchwork2021\\result.txt";
 
 
 int main() {
@@ -39,7 +39,6 @@ int main() {
 		std::cout << current.size() << std::endl;
         for (auto& letter : current) {
             letters.push_back(letter);
-
         }
     }
 
